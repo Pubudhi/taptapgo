@@ -8,11 +8,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CustomerMapper {
-    private final CustomerService customerService;
-
-    public CustomerMapper(CustomerService customerService) {
-        this.customerService = customerService;
-    }
 
     public Customer toCustomer(@Valid CustomerRequest request) {
         if (request == null) {
@@ -20,8 +15,8 @@ public class CustomerMapper {
         }
         return Customer.builder()
                 .id(request.id())
-                .firstName(request.fname())
-                .lastName(request.lname())
+                .firstName(request.firstName())
+                .lastName(request.lastName())
                 .email(request.email())
                 .address(request.address())
                 .build();
