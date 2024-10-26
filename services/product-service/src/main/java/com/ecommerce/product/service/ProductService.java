@@ -30,10 +30,11 @@ public class ProductService {
     }
 
     public List<ProductPurchaseResponse> purchaseProduct(List<ProductPurchaseRequest> productPurchaseRequest) {
-        //todo
-        // 1. do we have all the products
-        // 2.do we have sufficient qty
-        // 3.all goo start purchase
+        /*
+        * 1. do we have all the products
+        * 2.do we have sufficient qty
+        * 3.all goo start purchase
+        * */
 
         //fetch all product ids in the purchase request
         var productIds = productPurchaseRequest
