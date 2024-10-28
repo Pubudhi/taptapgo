@@ -11,12 +11,14 @@ import com.ecommerce.order.product.PurchaseRequest;
 import com.ecommerce.order.repository.OrderRepository;
 import com.ecommerce.order.request.OrderRequest;
 import com.ecommerce.order.response.OrderResponse;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -63,8 +65,15 @@ public class OrderService {
     }
 
     public List<OrderResponse> findAllOrders() {
+        return this.repository.findAll()
+                .stream()
+                .map(this.mapper::fromOrder)
+                .collect(Collectors.toList());
     }
 
     public OrderResponse findById(Integer orderId) {
+        return this.repository.findById(orderId)
+                .map(this.mapper::fromOrder)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("No order found with the provided ID: %d", orderId)));
     }
 }
